@@ -267,34 +267,56 @@ section.block > h3.sub-title:first-of-type { margin-top: 0; }
   text-underline-offset: 2px;
 }
 
-.activity-block {
-  text-align: center;
-  padding: clamp(28px, 5vw, 44px) 0 0;
+.project-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: clamp(24px, 4vw, 36px);
+  border-radius: 3px;
+  max-width: 560px;
 }
 
-.activity-tag {
+.project-tag {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 14px;
+  margin: 0 0 12px;
 }
 
-.activity-block h3 {
+.project-card h3 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.5rem;
-  margin: 0 0 16px;
+  font-size: 1.6rem;
+  margin: 0 0 12px;
 }
 
-.activity-block p {
-  margin: 0 auto 20px;
+.project-desc {
   color: var(--muted);
-  max-width: 46ch;
+  font-size: 0.95rem;
+  margin: 0 0 22px;
+  max-width: 52ch;
 }
 
-.activity-block a.text-link { font-weight: 600; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border: 1px solid var(--ink);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
 
 .records-list {
   list-style: none;
