@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UnBoCS</title>
+<meta name="description" content="京大生が高校に出前授業を届け、高校生が『何を学びたいか』を見つける伴走をする出前授業プログラム UnBoCS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --surface: #efeade;
+    --surface-2: #ffffff;
+    --ink: #211e19;
+    --muted: #6f6a5d;
+    --accent: #3d5a4c;
+    --accent-tint: #e6ede8;
+    --line: #dbd4c4;
+
+    --font-display: "Fraunces", Georgia, "Hiragino Mincho ProN", serif;
+    --font-body: "Public Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+
+    --measure: 62ch;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1d1b;
+      --surface: #242621;
+      --surface-2: #202220;
+      --ink: #ece7db;
+      --muted: #a49e8d;
+      --accent: #86ab95;
+      --accent-tint: #263029;
+      --line: #35362f;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #1b1d1b;
+    --surface: #242621;
+    --surface-2: #202220;
+    --ink: #ece7db;
+    --muted: #a49e8d;
+    --accent: #86ab95;
+    --accent-tint: #263029;
+    --line: #35362f;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  img { max-width: 100%; }
+
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 40px);
+  }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px clamp(20px, 5vw, 40px);
+    max-width: 960px;
+    margin: 0 auto;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .brand .mark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+
+  .brand .parent {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  nav.primary ul {
+    list-style: none;
+    display: flex;
+    gap: clamp(12px, 3vw, 24px);
+    margin: 0;
+    padding: 0;
+  }
+
+  nav.primary a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease;
+  }
+
+  nav.primary a:hover { color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: clamp(52px, 11vw, 110px) 0 clamp(44px, 8vw, 72px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    background: var(--accent-tint);
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 26px;
+  }
+
+  .status-pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  h1.hero-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6vw, 3.7rem);
+    line-height: 1.2;
+    margin: 0 0 24px;
+    text-wrap: balance;
+    max-width: 15em;
+  }
+
+  h1.hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-lede {
+    max-width: var(--measure);
+    font-size: clamp(1.02rem, 1.8vw, 1.15rem);
+    color: var(--muted);
+    margin: 0 0 32px;
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border: 1px solid var(--ink);
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  .btn-solid {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-solid:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line);
+  }
+  .btn-outline:hover { border-color: var(--ink); transform: translateY(-1px); }
+
+  /* ---------- section shell ---------- */
+  section.block {
+    padding: clamp(48px, 9vw, 88px) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section.block:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding-top: 6px;
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3.2vw, 1.9rem);
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: var(--measure);
+    margin: 0;
+  }
+
+  .section-body {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+  }
+
+  /* ---------- problem ---------- */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .problem-card {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 20px;
+  }
+
+  .problem-card .num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .problem-card p {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  /* ---------- process ---------- */
+  .process-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .process-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    padding: 26px 0;
+    border-top: 1px solid var(--line);
+  }
+  .process-item:first-child { border-top: none; padding-top: 0; }
+  .process-item:last-child { padding-bottom: 0; }
+
+  .process-item .step {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .process-item h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    margin: 0 0 8px;
+  }
+
+  .process-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 54ch;
+  }
+
+  /* ---------- audience ---------- */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .audience-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: clamp(24px, 3vw, 30px);
+  }
+
+  .audience-card .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .audience-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0 0 16px;
+  }
+
+  .audience-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .audience-card li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 0.93rem;
+    color: var(--ink);
+  }
+
+  .audience-card li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* ---------- about strip ---------- */
+  .about-strip {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .about-strip .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+  }
+
+  .about-strip p {
+    margin: 0 0 10px;
+    max-width: var(--measure);
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+
+  .about-strip a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* ---------- cta banner ---------- */
+  .cta-banner {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 3px;
+    padding: clamp(32px, 6vw, 56px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .cta-banner p {
+    margin: 0;
+    color: color-mix(in srgb, var(--bg) 70%, transparent);
+    font-size: 0.92rem;
+    max-width: 44ch;
+  }
+
+  .cta-banner .btn-solid {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    white-space: nowrap;
+  }
+  .cta-banner .btn-solid:hover { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 28px clamp(20px, 5vw, 40px);
+    text-align: center;
+  }
+  footer p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .section-head, .section-body, .about-strip {
+      grid-template-columns: 1fr;
+    }
+    .section-num { padding-top: 0; }
+    .cta-banner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="header-inner">
+    <a class="brand" href="../">
+      <span class="mark">UnBoCS</span>
+      <span class="parent">by 平野毅朗 / 一般社団法人BoCS</span>
+    </a>
+    <nav class="primary" aria-label="主要ナビゲーション">
+      <ul>
+        <li><a href="#problem">課題</a></li>
+        <li><a href="#program">プログラム</a></li>
+        <li><a href="#audience">対象</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="status-pill">パイロット校・自治体 募集中</span>
+    <h1 class="hero-title">「何を<em>学びたいか</em>」を、高校生と一緒に見つける。</h1>
+    <p class="hero-lede">
+      UnBoCSは、専門分野を持つ京都大学の学生が高校に出向き、生徒一人ひとりの興味・課題意識と向き合いながら
+      進路選択に伴走する出前授業プログラムです。連携いただける高校・自治体を募集しています。
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#contact">連携について相談する</a>
+      <a class="btn btn-outline" href="#program">プログラム内容を見る</a>
+    </div>
+  </section>
+
+  <section class="block" id="problem">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 class="section-title">高校の進路指導が抱える課題</h2>
+        <p class="section-sub">多くの高校生が、限られた情報の中で進路を選ばざるを得ない状況にあります。</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <span class="num">課題 01</span>
+          <p>学問領域の種類・特徴に関する情報が十分に与えられておらず、生徒は各自の限られた情報の中で進路を選択せざるを得ない。</p>
+        </div>
+        <div class="problem-card">
+          <span class="num">課題 02</span>
+          <p>生徒自身が「何をやりたいのか」を明確に言語化できておらず、大学進学への強いモチベーションを持ちづらい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="program">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 class="section-title">プログラムの内容</h2>
+        <p class="section-sub">出前授業を通じて、生徒の興味の言語化から専門分野を持つ大学生との伴走までを一連の流れで行います。</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="process-list">
+        <div class="process-item">
+          <span class="step">1</span>
+          <div>
+            <h3>興味・課題意識を一緒に探求する</h3>
+            <p>生徒本人もまだ言語化できていない興味や問題意識を、対話を通じて一緒に掘り下げます。</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <span class="step">2</span>
+          <div>
+            <h3>専門分野を持つ京大生とマッチング</h3>
+            <p>すでに興味分野が見えている生徒には、その分野を専門とする京都大学の学生をマッチングします。</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <span class="step">3</span>
+          <div>
+            <h3>大学生が伴走し、課題解決に取り組む</h3>
+            <p>一つの課題に対して大学生が継続的に伴走し、生徒と一緒に解決へ向かうプロセスそのものを経験してもらいます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="audience">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 class="section-title">こんな方に</h2>
+        <p class="section-sub">学校・自治体の教育担当の方、そして生徒自身の両方にとって意味のあるプログラムを目指しています。</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="kicker">School / Local Government</span>
+          <h3>学校・自治体の方へ</h3>
+          <ul>
+            <li>生徒の進路選択の解像度を上げたい</li>
+            <li>大学進学へのモチベーションを高めるきっかけをつくりたい</li>
+            <li>外部の大学生と連携した探究学習を実践したい</li>
+            <li>大学進学者を増やす取り組みを模索している</li>
+          </ul>
+        </div>
+        <div class="audience-card">
+          <span class="kicker">High School Student</span>
+          <h3>高校生の方へ</h3>
+          <ul>
+            <li>興味のある分野を専門にしている大学生と直接話してみたい</li>
+            <li>やりたいことがまだ言葉になっていない</li>
+            <li>一人で悩まず、一緒に考えてくれる相手がほしい</li>
+            <li>大学で学ぶことのリアルなイメージを持ちたい</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="about-strip">
+      <div class="avatar" aria-hidden="true">毅</div>
+      <div>
+        <p>
+          UnBoCSは、一般社団法人BoCS 代表理事・平野毅朗（京都大学理学部数理科学系）が中心となり、
+          学生の挑戦を支援するプログラム「Agora」のもとで企画・検証を進めています。
+        </p>
+        <p><a href="../">平野毅朗のプロフィールを見る →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="cta-banner">
+      <div>
+        <h2>連携いただける高校・自治体を募集しています</h2>
+        <p>出前授業の内容や実施方法について、まずは気軽にご相談ください。個別に詳細をご案内します。</p>
+      </div>
+      <a class="btn btn-solid" href="mailto:hiratake315@gmail.com?subject=UnBoCS%20出前授業について">hiratake315@gmail.com</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 UnBoCS — <a href="../">平野毅朗</a></p>
+</footer>
+
+</body>
+</html>

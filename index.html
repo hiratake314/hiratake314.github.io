@@ -345,6 +345,44 @@
     color: var(--ink);
   }
 
+  /* ---------- project ---------- */
+  .project-shell {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+  }
+
+  .project-card {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: clamp(24px, 4vw, 36px);
+    border-radius: 3px;
+    max-width: 640px;
+  }
+
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 12px;
+  }
+
+  .project-card h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 12px;
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 22px;
+    max-width: 52ch;
+  }
+
   /* ---------- contact ---------- */
   .contact-shell {
     display: grid;
@@ -392,7 +430,7 @@
 
   @media (max-width: 640px) {
     .header-inner { flex-direction: column; gap: 10px; align-items: flex-start; }
-    .section-head, .about-grid, .skill-groups, .contact-shell {
+    .section-head, .about-grid, .skill-groups, .project-shell, .contact-shell {
       grid-template-columns: 1fr;
     }
     .section-num { padding-top: 0; }
@@ -408,6 +446,7 @@
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#strengths">Strengths</a></li>
+        <li><a href="#project">Project</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -480,9 +519,28 @@
     </div>
   </section>
 
-  <section class="block" id="contact">
+  <section class="block" id="project">
     <div class="section-head">
       <span class="section-num">03</span>
+      <h2 class="section-title">Project</h2>
+    </div>
+    <div class="project-shell">
+      <div></div>
+      <div class="project-card">
+        <p class="project-tag">出前授業プログラム / パイロット校 募集中</p>
+        <h3>UnBoCS</h3>
+        <p class="project-desc">
+          高校生が「何を学びたいか」を見つけられるよう、専門分野を持つ京大生が伴走する出前授業プログラムです。
+          学校・自治体の教育担当部署の方、高校生の方に向けて、企画の内容と連携についてまとめています。
+        </p>
+        <a class="btn btn-outline" href="unbocs/">プログラムを見る →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="contact">
+    <div class="section-head">
+      <span class="section-num">04</span>
       <h2 class="section-title">Contact</h2>
     </div>
     <div class="contact-shell">
