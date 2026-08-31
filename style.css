@@ -145,7 +145,7 @@ nav.primary a[aria-current="page"] { color: var(--nav-text); }
   justify-content: center;
   background-image:
     linear-gradient(rgba(20, 22, 19, 0.5), rgba(20, 22, 19, 0.5)),
-    url("images/study-session-1.jpg");
+    url("images/study-session-3.jpg");
   text-align: center;
 }
 
