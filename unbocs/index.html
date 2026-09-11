@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UnBoCS</title>
-<meta name="description" content="京大生が高校に出前授業を届け、高校生が『何を学びたいか』を見つける伴走をする出前授業プログラム UnBoCS">
+<meta name="description" content="偏差値や親の期待ではなく、自分自身の興味を進路選択の基準にする。京都大学の学生が伴走する高校生向けプログラム UnBoCS">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -177,11 +177,11 @@
   h1.hero-title {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(2.3rem, 6vw, 3.7rem);
-    line-height: 1.2;
+    font-size: clamp(2.2rem, 5.6vw, 3.5rem);
+    line-height: 1.25;
     margin: 0 0 24px;
     text-wrap: balance;
-    max-width: 15em;
+    max-width: 16em;
   }
 
   h1.hero-title em {
@@ -270,7 +270,7 @@
     gap: 24px;
   }
 
-  /* ---------- problem ---------- */
+  /* ---------- problem / point cards ---------- */
   .problem-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -305,7 +305,7 @@
     display: grid;
     grid-template-columns: 56px 1fr;
     gap: 20px;
-    padding: 26px 0;
+    padding: 30px 0;
     border-top: 1px solid var(--line);
   }
   .process-item:first-child { border-top: none; padding-top: 0; }
@@ -322,32 +322,57 @@
   .process-item h3 {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     margin: 0 0 8px;
   }
 
   .process-item p {
-    margin: 0;
+    margin: 0 0 14px;
     color: var(--muted);
     font-size: 0.95rem;
-    max-width: 54ch;
+    max-width: 56ch;
+  }
+  .process-item p:last-child { margin-bottom: 0; }
+
+  /* ---------- generic dash list (reused in program / validation) ---------- */
+  ul.dash-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  /* ---------- audience ---------- */
-  .audience-grid {
+  ul.dash-list li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 0.93rem;
+    color: var(--ink);
+  }
+
+  ul.dash-list li::before {
+    content: "\2013";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  /* ---------- reusable info-card grid (principles / advantage / audience) ---------- */
+  .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
   }
 
-  .audience-card {
+  .info-card {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 3px;
     padding: clamp(24px, 3vw, 30px);
   }
 
-  .audience-card .kicker {
+  .info-card .kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.06em;
@@ -357,34 +382,34 @@
     margin-bottom: 10px;
   }
 
-  .audience-card h3 {
+  .info-card h3 {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 1.3rem;
-    margin: 0 0 16px;
+    font-size: 1.15rem;
+    margin: 0 0 12px;
   }
 
-  .audience-card ul {
-    list-style: none;
+  .info-card p {
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .audience-card li {
-    padding-left: 18px;
-    position: relative;
     font-size: 0.93rem;
     color: var(--ink);
   }
 
-  .audience-card li::before {
-    content: "\2013";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
+  /* ---------- validation ---------- */
+  .validation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+  }
+
+  .validation-col h3 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-weight: 500;
   }
 
   /* ---------- about strip ---------- */
@@ -489,9 +514,9 @@
     </a>
     <nav class="primary" aria-label="主要ナビゲーション">
       <ul>
-        <li><a href="#problem">課題</a></li>
-        <li><a href="#program">プログラム</a></li>
-        <li><a href="#audience">対象</a></li>
+        <li><a href="#why">意義</a></li>
+        <li><a href="#program">事業内容</a></li>
+        <li><a href="#validation">事業検証</a></li>
         <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </nav>
@@ -501,36 +526,66 @@
 <main class="wrap">
 
   <section class="hero">
-    <span class="status-pill">パイロット校・自治体 募集中</span>
-    <h1 class="hero-title">「何を<em>学びたいか</em>」を、高校生と一緒に見つける。</h1>
+    <span class="status-pill">MVP検証中</span>
+    <h1 class="hero-title">「借り物の基準」ではなく、<em>自分の興味</em>を、進路選択の軸に。</h1>
     <p class="hero-lede">
-      UnBoCSは、専門分野を持つ京都大学の学生が高校に出向き、生徒一人ひとりの興味・課題意識と向き合いながら
-      進路選択に伴走する出前授業プログラムです。連携いただける高校・自治体を募集しています。
+      「進路選択を間違えた」という高校生・大学生の声は、後を絶ちません。偏差値や親の期待といった借り物の基準ではなく、
+      自分自身の興味に根ざした選択を、高校生のうちに。UnBoCSは、その気づきと言語化を京都大学の学生とともに支援するプログラムです。
     </p>
     <div class="hero-cta">
-      <a class="btn btn-solid" href="#contact">連携について相談する</a>
-      <a class="btn btn-outline" href="#program">プログラム内容を見る</a>
+      <a class="btn btn-solid" href="#program">事業内容を見る</a>
+      <a class="btn btn-outline" href="#contact">お問い合わせ</a>
     </div>
   </section>
 
-  <section class="block" id="problem">
+  <section class="block" id="why">
     <div class="section-head">
       <span class="section-num">01</span>
       <div>
-        <h2 class="section-title">高校の進路指導が抱える課題</h2>
-        <p class="section-sub">多くの高校生が、限られた情報の中で進路を選ばざるを得ない状況にあります。</p>
+        <h2 class="section-title">意義</h2>
+        <p class="section-sub">なぜ今、進路選択の基準を問い直す必要があるのか。</p>
       </div>
     </div>
     <div class="section-body">
       <div></div>
       <div class="problem-grid">
         <div class="problem-card">
-          <span class="num">課題 01</span>
-          <p>学問領域の種類・特徴に関する情報が十分に与えられておらず、生徒は各自の限られた情報の中で進路を選択せざるを得ない。</p>
+          <span class="num">現状</span>
+          <p>「進路選択を間違えた」という高校生・大学生の声は、後を絶ちません。</p>
         </div>
         <div class="problem-card">
-          <span class="num">課題 02</span>
-          <p>生徒自身が「何をやりたいのか」を明確に言語化できておらず、大学進学への強いモチベーションを持ちづらい。</p>
+          <span class="num">目指すこと</span>
+          <p>借り物の基準（偏差値・親の期待）ではなく、自分自身の興味に根ざした選択＝自己実現を、高校生のうちに支援したい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="principles">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 class="section-title">価値基準</h2>
+        <p class="section-sub">UnBoCSがプログラム設計において大切にしていること。</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="kicker">01</span>
+          <h3>借り物でない基準を持つ</h3>
+          <p>自分の興味を言語化し、"借り物でない基準"を持てるようにする。</p>
+        </div>
+        <div class="info-card">
+          <span class="kicker">02</span>
+          <h3>AIに代行させない</h3>
+          <p>仮説形成・検証・意味づけは、AIに代行させない。AI時代に必要な能力を涵養し、保護者の"思考力低下への不安"にも応える。</p>
+        </div>
+        <div class="info-card">
+          <span class="kicker">03</span>
+          <h3>現在進行形の専門性</h3>
+          <p>"その学問を今研究している"大学生本人が講師を務める。専門性と、現在進行形の熱量を直接届ける。</p>
         </div>
       </div>
     </div>
@@ -538,10 +593,10 @@
 
   <section class="block" id="program">
     <div class="section-head">
-      <span class="section-num">02</span>
+      <span class="section-num">03</span>
       <div>
-        <h2 class="section-title">プログラムの内容</h2>
-        <p class="section-sub">出前授業を通じて、生徒の興味の言語化から専門分野を持つ大学生との伴走までを一連の流れで行います。</p>
+        <h2 class="section-title">事業内容</h2>
+        <p class="section-sub">「興味の発見」から「興味の深化」まで、一連の流れで支援します。</p>
       </div>
     </div>
     <div class="section-body">
@@ -550,23 +605,80 @@
         <div class="process-item">
           <span class="step">1</span>
           <div>
-            <h3>興味・課題意識を一緒に探求する</h3>
-            <p>生徒本人もまだ言語化できていない興味や問題意識を、対話を通じて一緒に掘り下げます。</p>
+            <h3>興味の発見</h3>
+            <p>自分史を使いながら「偏愛」と「もやもや」を掘り起こし、漠然とした違和感を検証可能な「自分の問い」に具体化していきます。</p>
+            <ul class="dash-list">
+              <li>自分史を使いながら、「偏愛」と「もやもや」を掘り起こす</li>
+              <li>前提を疑わせる発問（違和感の言語化）</li>
+              <li>漠然とした違和感を、検証可能な「自分の問い」に具体化する（問いの言語化）</li>
+              <li>自分で調べた結果を、AIとの"答え合わせ"にかける → 自分の考えとAIの相違点を列挙させ、思考の癖を自覚させる</li>
+              <li>探究レポートの作成、生徒の「興味の核」を提示する → 自分がどう考えたかを振り返り、メタ認知を鍛える</li>
+            </ul>
           </div>
         </div>
         <div class="process-item">
           <span class="step">2</span>
           <div>
-            <h3>専門分野を持つ京大生とマッチング</h3>
-            <p>すでに興味分野が見えている生徒には、その分野を専門とする京都大学の学生をマッチングします。</p>
+            <h3>興味の深化</h3>
+            <p>発見された興味の核をもとに、京大生とマッチングし、専門的な直接指導へ移行します。</p>
           </div>
         </div>
-        <div class="process-item">
-          <span class="step">3</span>
-          <div>
-            <h3>大学生が伴走し、課題解決に取り組む</h3>
-            <p>一つの課題に対して大学生が継続的に伴走し、生徒と一緒に解決へ向かうプロセスそのものを経験してもらいます。</p>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="advantage">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 class="section-title">競合優位性</h2>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="card-grid">
+        <div class="info-card">
+          <span class="kicker">01</span>
+          <h3>AI時代への明確なポジショニング</h3>
+          <p>「仮説形成・検証・意味づけをAIに代行させない」という価値基準により、保護者の"思考力低下への不安"に直接応えます。</p>
+        </div>
+        <div class="info-card">
+          <span class="kicker">02</span>
+          <h3>発見を経た、精度の高いマッチング</h3>
+          <p>興味の核（How/Why）を掘り当てたうえで京大生とマッチングするため、ミスマッチ率が低くなります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="validation">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 class="section-title">事業検証</h2>
+        <p class="section-sub">MVPとして、興味の発見フェーズを1クール実施し、検証を進めています。</p>
+      </div>
+    </div>
+    <div class="section-body">
+      <div></div>
+      <div class="validation-grid">
+        <div class="validation-col">
+          <h3>MVP設計</h3>
+          <ul class="dash-list">
+            <li>対象：高校生4名</li>
+            <li>講師：全学問領域から集めた京大生・院生ボランティア講師</li>
+            <li>内容：興味の発見フェーズ（Section1）を1クール実施</li>
+          </ul>
+        </div>
+        <div class="validation-col">
+          <h3>検証指標</h3>
+          <ul class="dash-list">
+            <li>事前事後面談での発言の変化（曖昧→具体的）</li>
+            <li>保護者の反応</li>
+            <li>継続希望率</li>
+            <li>興味の発見→深化フェーズへの移行率</li>
+            <li>運営：ボランティア講師の継続意欲</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -574,34 +686,23 @@
 
   <section class="block" id="audience">
     <div class="section-head">
-      <span class="section-num">03</span>
+      <span class="section-num">06</span>
       <div>
         <h2 class="section-title">こんな方に</h2>
-        <p class="section-sub">学校・自治体の教育担当の方、そして生徒自身の両方にとって意味のあるプログラムを目指しています。</p>
       </div>
     </div>
     <div class="section-body">
       <div></div>
-      <div class="audience-grid">
-        <div class="audience-card">
-          <span class="kicker">School / Local Government</span>
-          <h3>学校・自治体の方へ</h3>
-          <ul>
-            <li>生徒の進路選択の解像度を上げたい</li>
-            <li>大学進学へのモチベーションを高めるきっかけをつくりたい</li>
-            <li>外部の大学生と連携した探究学習を実践したい</li>
-            <li>大学進学者を増やす取り組みを模索している</li>
-          </ul>
-        </div>
-        <div class="audience-card">
+      <div class="card-grid">
+        <div class="info-card">
           <span class="kicker">High School Student</span>
           <h3>高校生の方へ</h3>
-          <ul>
-            <li>興味のある分野を専門にしている大学生と直接話してみたい</li>
-            <li>やりたいことがまだ言葉になっていない</li>
-            <li>一人で悩まず、一緒に考えてくれる相手がほしい</li>
-            <li>大学で学ぶことのリアルなイメージを持ちたい</li>
-          </ul>
+          <p>偏差値や親の期待ではなく、自分の興味を進路選択の基準にしたい方。まだ言葉にできていない「もやもや」がある方。</p>
+        </div>
+        <div class="info-card">
+          <span class="kicker">Kyoto University</span>
+          <h3>京大生・大学院生の方へ</h3>
+          <p>ボランティア講師として、自分が今取り組んでいる学問への熱量を高校生に届けたい方。全学問領域から募集しています。</p>
         </div>
       </div>
     </div>
@@ -623,10 +724,10 @@
   <section class="block" id="contact">
     <div class="cta-banner">
       <div>
-        <h2>連携いただける高校・自治体を募集しています</h2>
-        <p>出前授業の内容や実施方法について、まずは気軽にご相談ください。個別に詳細をご案内します。</p>
+        <h2>MVPへのご参加・ご協力をお待ちしています</h2>
+        <p>高校生としての参加、京大生・大学院生としてのボランティア講師など、関わり方は問いません。まずはお気軽にご連絡ください。</p>
       </div>
-      <a class="btn btn-solid" href="mailto:hiratake315@gmail.com?subject=UnBoCS%20出前授業について">hiratake315@gmail.com</a>
+      <a class="btn btn-solid" href="mailto:hiratake315@gmail.com?subject=UnBoCS%20について">hiratake315@gmail.com</a>
     </div>
   </section>
 
